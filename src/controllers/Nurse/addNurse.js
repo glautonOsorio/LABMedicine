@@ -2,7 +2,7 @@ const Patient = require("../../models/patient");
 const Medic = require("../../models/medic");
 const Nurse = require("../../models/nurse");
 
-async function addPatient(req, res) {
+async function addNurse(req, res) {
   try {
     const data = {
       name: req.body.name,
@@ -10,11 +10,9 @@ async function addPatient(req, res) {
       birthDay: req.body.birthDay,
       cpf: req.body.cpf,
       cellphone: req.body.cellphone,
-      emergencyContact: req.body.emergencyContact,
-      allergies: req.body.allergies,
-      healthCare: req.body.healthCare,
-      status: req.body.status,
-      timesTreated: req.body.timesTreated,
+      educationInstitution: req.body.educationInstitution,
+      cofenUf: req.body.cofenUf,
+      systemStatus: req.body.systemStatus,
     };
 
     const cpfPatient = await Patient.findOne({
@@ -31,13 +29,13 @@ async function addPatient(req, res) {
       return res.status(409).json({ message: "The CPF is already in use" });
     }
 
-    const patient = await Patient.create(data);
+    const nurse = await Nurse.create(data);
 
-    res.status(201).json(patient);
+    res.status(201).json(nurse);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "There was a error in the request" });
   }
 }
 
-module.exports = addPatient;
+module.exports = addNurse;

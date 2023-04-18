@@ -21,7 +21,7 @@ async function searchPatient(req, res) {
 
       const patients = await Patient.findAll({
         where: {
-          raca: queryStatus.status,
+          status: queryStatus.status,
         },
       });
       res.json(patients);
