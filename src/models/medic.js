@@ -51,9 +51,8 @@ const Medic = database.define("medic", {
     type: Sequelize.ENUM("Active", "Not Active"),
     defaultValue: "Active",
   },
-  timesTreated: {
+  appointment_id: {
     type: Sequelize.INTEGER,
-    autoIncrement: true,
     defaultValue: 0,
   },
 });

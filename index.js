@@ -28,6 +28,8 @@ const searchMedic = require("./src/controllers/Medic/searchMedics");
 const searchMedicId = require("./src/controllers/Medic/searchMedicId");
 const deleteMedic = require("./src/controllers/Medic/deleteMedic");
 
+const makeAppointment = require("./src/controllers/appointment");
+
 const app = express();
 app.use(express.json());
 
@@ -35,7 +37,7 @@ database.authenticate();
 database.sync({ alter: true });
 
 app.post("/api/patient", validateNewPatient, addPatient);
-app.put("/api/patient/:id", validateAttPatient, attPatient);
+app.put("/api/patient/:id", attPatient);
 app.put("/api/patient/:id/status", attStatus);
 app.put("/api/patient/:id/allergies", attAllergies);
 app.get("/api/patient", searchPatient);
@@ -55,6 +57,8 @@ app.put("/api/medic/:id/systemStatus", attMedicStatus);
 app.get("/api/medic", searchMedic);
 app.get("/api/medic/:id", searchMedicId);
 app.delete("/api/medic/:id", deleteMedic);
+
+app.post("/api/appointment", makeAppointment);
 
 app.listen(3333, () => {
   console.log("We are here");

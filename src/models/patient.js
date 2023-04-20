@@ -50,9 +50,9 @@ const Patient = database.define("patient", {
       "TREATED",
       "NOT_TREATED"
     ),
-    defaultValue: "NOT_TREATED",
+    defaultValue: "AWAITING_TREATMENT",
   },
-  timesTreated: {
+  appointment_id: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },
