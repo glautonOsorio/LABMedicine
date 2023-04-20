@@ -4,7 +4,8 @@ const express = require("express");
 const database = require("./src/database/database");
 
 const validateNewPatient = require("./src/middlewares/Patient/validatePatient");
-const validateAttPatient = require("./src/middlewares/Patient/validateAttPatient");
+const validateNewNurse = require("./src/middlewares/Nurse/validateNurse");
+const validateNewMedic = require("./src/middlewares/Medic/validateMedic");
 
 const addPatient = require("./src/controllers/Patient/addPatient");
 const attPatient = require("./src/controllers/Patient/attPatient");
@@ -44,14 +45,14 @@ app.get("/api/patient", searchPatient);
 app.get("/api/patient/:id", searchPatientId);
 app.delete("/api/patient/:id", deletePatient);
 
-app.post("/api/nurse", addNurse);
+app.post("/api/nurse", validateNewNurse, addNurse);
 app.put("/api/nurse/:id", attNurse);
 app.put("/api/nurse/:id/systemStatus", attStatusNurse);
 app.get("/api/nurse", searchNurse);
 app.get("/api/nurse/:id", searchNurseId);
 app.delete("/api/nurse/:id", deleteNurse);
 
-app.post("/api/medic", addMedic);
+app.post("/api/medic", validateNewMedic, addMedic);
 app.put("/api/medic/:id", attMedic);
 app.put("/api/medic/:id/systemStatus", attMedicStatus);
 app.get("/api/medic", searchMedic);
