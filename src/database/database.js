@@ -1,12 +1,12 @@
 const Sequelize = require("sequelize");
 
 const database = new Sequelize({
-  dialect: "postgres",
-  host: "localhost",
-  username: "postgres",
+  dialect: process.env.DATABASE_DIALECT,
+  host: process.env.DATABASE_HOST,
+  username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
-  port: "5432",
-  database: "LABMedicine",
+  port: process.env.DATABASE_PORT,
+  database: process.env.DATABASE_NAME,
   define: {
     timestamps: true,
     underscored: true,

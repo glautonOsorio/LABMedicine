@@ -62,5 +62,5 @@ app.delete("/api/medic/:id", deleteMedic);
 app.post("/api/appointment", makeAppointment);
 
 app.listen(3333, () => {
-  console.log("We are here");
+  console.log("Online we are");
 });
