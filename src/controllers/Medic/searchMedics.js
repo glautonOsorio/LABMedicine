@@ -5,7 +5,7 @@ async function searchMedic(req, res) {
     const queryStatus = req.query;
 
     if (queryStatus.systemStatus) {
-      if (!["Active", "Not Active"].includes(req.body.systemStatus)) {
+      if (!["Active", "Not Active"].includes(queryStatus.systemStatus)) {
         return res.status(400).json({
           message:
             "The status needs to be one of these options (Active or Not Active),",

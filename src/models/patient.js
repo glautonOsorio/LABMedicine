@@ -35,7 +35,7 @@ const Patient = database.define("patient", {
       "NONE",
       "ASTMHA",
       "SKIN_ALLERGIES",
-      "LACTOSE",
+      "SKIN_ALLERGIES",
       "OTHER"
     ),
     defaultValue: "NONE",
@@ -47,8 +47,8 @@ const Patient = database.define("patient", {
     type: Sequelize.ENUM(
       "AWAITING_TREATMENT",
       "IN_TREATMENT",
-      "TREATED",
-      "NOT_TREATED"
+      "NOT_TREATED",
+      "TREATED"
     ),
     defaultValue: "AWAITING_TREATMENT",
   },
