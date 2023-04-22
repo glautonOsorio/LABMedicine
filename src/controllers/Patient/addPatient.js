@@ -14,7 +14,6 @@ async function addPatient(req, res) {
       allergies: req.body.allergies,
       healthCare: req.body.healthCare,
       status: req.body.status,
-      timesTreated: req.body.timesTreated,
     };
 
     const cpfPatient = await Patient.findOne({

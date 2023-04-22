@@ -35,7 +35,7 @@ const Patient = database.define("patient", {
       "NONE",
       "ASTMHA",
       "SKIN_ALLERGIES",
-      "SKIN_ALLERGIES",
+      "LACTOSE",
       "OTHER"
     ),
     defaultValue: "NONE",
