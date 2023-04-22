@@ -8,11 +8,17 @@ async function deleteMedic(req, res) {
     if (!medicData) {
       return res.status(404).json({ message: "Medic not found" });
     }
+    if (medicData.appointment_id > 0) {
+      return res
+        .status(409)
+        .json({ message: "The medic has appointments in the database" });
+    } // creditos para Andre Luiz Amorim de Souza
+
     await medicData.destroy();
 
-    return response.status(204).json("The deed is done, Medic is no more");
+    return res.status(204).json("The deed is done, Medic is no more");
   } catch (error) {
-    return response
+    return res
       .status(500)
       .json({ message: "There was a error in the request" });
   }

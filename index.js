@@ -23,7 +23,7 @@ const searchNurseId = require("./src/controllers/Nurse/searchNurseId");
 const deleteNurse = require("./src/controllers/Nurse/deleteNurse");
 
 const addMedic = require("./src/controllers/Medic/addMedic");
-const attMedic = require("./src/controllers/Medic/attPatient");
+const attMedic = require("./src/controllers/Medic/attMedic");
 const attMedicStatus = require("./src/controllers/Medic/attStatusMedic");
 const searchMedic = require("./src/controllers/Medic/searchMedics");
 const searchMedicId = require("./src/controllers/Medic/searchMedicId");

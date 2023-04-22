@@ -10,9 +10,9 @@ async function deleteNurse(req, res) {
     }
     await nurseData.destroy();
 
-    return response.status(204).json("The deed is done, Nurse is no more");
+    return res.status(204).json("The deed is done, Nurse is no more");
   } catch (error) {
-    return response
+    return res
       .status(500)
       .json({ message: "There was a error in the request" });
   }
