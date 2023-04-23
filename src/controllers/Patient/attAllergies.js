@@ -7,7 +7,7 @@ async function attAllergies(req, res) {
 
     if (
       !["NONE", "ASTMHA", "SKIN_ALLERGIES", "LACTOSE", "OTHER"].includes(
-        req.body.status
+        req.body.allergies
       )
     ) {
       return res.status(400).json({

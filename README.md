@@ -103,7 +103,7 @@ Lab Medicina e um projeto de API usando Node, Express e Sequelize, com o propós
 > "NONE"
 > "ASTMHA"
 > "SKIN_ALLERGIES"
-> "SKIN_ALLERGIES"
+> "LACTOSE"
 > "OTHER"
 
 **Exemplo**

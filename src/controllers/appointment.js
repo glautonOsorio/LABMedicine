@@ -20,7 +20,7 @@ async function makeAppointment(req, res) {
         .json({ message: "Patient or Medic does not exist" });
     }
 
-    if ((medic.systemStatus = "Not Active")) {
+    if (medic.systemStatus === "Not Active") {
       return res
         .status(409)
         .json({ message: `Dr.${medic.name} is not active today` });
