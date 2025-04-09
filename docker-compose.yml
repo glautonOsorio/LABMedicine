@@ -4,11 +4,14 @@ services:
     container_name: postgres_labmedicine
     restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: labmedicine
+      DATABASE_HOST: db
+      DATABASE_USER: user
+      DATABASE_PASSWORD: password
+      DATABASE_DB: labmedicine
+      DATABASE_URL: postgres://user:password@db:5432/labmedicine
     ports:
       - "5432:5432"
+
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
