@@ -1,0 +1,50 @@
+{
+  "admin": {
+    "user": ["create", "read", "update", "delete"],
+    "patient": ["create", "read", "update", "delete"],
+    "appointment": ["read"],
+    "medicalRecord": ["read"],
+    "exam": ["read"],
+    "examResult": ["read"],
+    "diet": ["read"],
+    "physicalExercise": ["read"],
+    "medicine": ["create", "read", "update", "delete"],
+    "prescription": ["read"],
+    "address": ["create", "read", "update", "delete"],
+    "specialty": ["create", "read", "update", "delete"],
+    "document": ["create", "read", "update", "delete"],
+    "log": ["create", "read", "update", "delete"]
+  },
+  "medic": {
+    "user": ["read"],
+    "patient": ["create", "read", "update", "delete"],
+    "appointment": ["create", "read", "update", "delete"],
+    "medicalRecord": ["create", "read", "update", "delete"],
+    "exam": ["create", "read", "update", "delete"],
+    "examResult": ["create", "read", "update", "delete"],
+    "diet": ["create", "read", "update", "delete"],
+    "physicalExercise": ["create", "read", "update", "delete"],
+    "medicine": ["read"],
+    "prescription": ["create", "read", "update", "delete"],
+    "address": ["read"],
+    "specialty": ["read"],
+    "document": ["create", "read", "update", "delete"],
+    "log": []
+  },
+  "nurse": {
+    "user": ["read"],
+    "patient": ["create", "read", "update", "delete"],
+    "appointment": ["create", "read", "update", "delete"],
+    "medicalRecord": ["read"],
+    "exam": ["read"],
+    "examResult": ["read"],
+    "diet": ["read"],
+    "physicalExercise": ["create", "read", "update", "delete"],
+    "medicine": ["read"],
+    "prescription": ["read"],
+    "address": ["read"],
+    "specialty": ["read"],
+    "document": ["read"],
+    "log": []
+  }
+}
