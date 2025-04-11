@@ -1,6 +1,7 @@
+"use strict";
 const { Model, DataTypes } = require("sequelize");
 
-class Appointment extends Model {
+class Medicine extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -10,31 +11,44 @@ class Appointment extends Model {
           allowNull: false,
           primaryKey: true,
         },
-        appointmentReason: {
+        name: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        appointmentDate: {
+        date: {
           type: DataTypes.DATEONLY,
           allowNull: false,
         },
-        appointmentTime: {
+        time: {
           type: DataTypes.TIME,
           allowNull: false,
         },
-        description: {
+        medicine_type: {
+          type: DataTypes.ENUM(
+            "capsule",
+            "pill",
+            "liquid",
+            "cream",
+            "gel",
+            "inhalation",
+            "injection",
+            "spray"
+          ),
+          allowNull: false,
+        },
+        amount: {
+          type: DataTypes.FLOAT,
+          allowNull: true,
+        },
+        unit: {
+          type: DataTypes.ENUM("mg", "mcg", "g", "ml", "%"),
+          allowNull: true,
+        },
+        comments: {
           type: DataTypes.STRING,
           allowNull: true,
         },
-        prescriptionMedication: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        },
-        dosagePrecautions: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        },
-        systemStatus: {
+        system_status: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: true,
@@ -50,8 +64,8 @@ class Appointment extends Model {
       },
       {
         sequelize,
-        modelName: "Appointment",
-        tableName: "appointments",
+        modelName: "Medicine",
+        tableName: "medicines",
         underscored: true,
         timestamps: true,
         paranoid: true,
@@ -60,16 +74,10 @@ class Appointment extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Patient, {
-      as: "patient",
-      foreignKey: "patient_id",
-    });
-
-    this.belongsTo(models.User, {
-      as: "user",
-      foreignKey: "user_id",
-    });
+    this.belongsTo(models.Patient, { foreignKey: "patient_id" });
+    this.belongsTo(models.User, { foreignKey: "user_id", as: "creator" });
+    this.hasMany(models.Prescription, { foreignKey: "medicine_id" });
   }
 }
 
-module.exports = Appointment;
+module.exports = Medicine;

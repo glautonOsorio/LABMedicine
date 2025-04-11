@@ -1,6 +1,7 @@
+"use strict";
 const { Model, DataTypes } = require("sequelize");
 
-class Appointment extends Model {
+class Exam extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -10,31 +11,31 @@ class Appointment extends Model {
           allowNull: false,
           primaryKey: true,
         },
-        appointmentReason: {
+        name: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        appointmentDate: {
+        exam_date: {
           type: DataTypes.DATEONLY,
           allowNull: false,
         },
-        appointmentTime: {
+        exam_time: {
           type: DataTypes.TIME,
           allowNull: false,
         },
-        description: {
+        exam_type: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        laboratory: {
           type: DataTypes.STRING,
           allowNull: true,
         },
-        prescriptionMedication: {
+        results: {
           type: DataTypes.STRING,
           allowNull: true,
         },
-        dosagePrecautions: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        },
-        systemStatus: {
+        system_status: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: true,
@@ -47,11 +48,15 @@ class Appointment extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        document_id: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+        },
       },
       {
         sequelize,
-        modelName: "Appointment",
-        tableName: "appointments",
+        modelName: "Exam",
+        tableName: "exams",
         underscored: true,
         timestamps: true,
         paranoid: true,
@@ -60,16 +65,13 @@ class Appointment extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Patient, {
-      as: "patient",
-      foreignKey: "patient_id",
-    });
-
-    this.belongsTo(models.User, {
-      as: "user",
-      foreignKey: "user_id",
+    this.belongsTo(models.Patient, { foreignKey: "patient_id" });
+    this.belongsTo(models.User, { foreignKey: "user_id" });
+    this.belongsTo(models.Document, {
+      foreignKey: "document_id",
+      as: "document",
     });
   }
 }
 
-module.exports = Appointment;
+module.exports = Exam;

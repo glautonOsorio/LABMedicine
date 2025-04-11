@@ -1,3 +1,4 @@
+"use strict";
 const { Model, DataTypes } = require("sequelize");
 
 class Patient extends Model {
@@ -10,66 +11,112 @@ class Patient extends Model {
           allowNull: false,
           primaryKey: true,
         },
-        name: {
-          type: DataTypes.STRING,
-        },
-        email: {
+        full_name: {
           type: DataTypes.STRING,
           allowNull: false,
-          unique: true,
         },
         gender: {
-          type: DataTypes.STRING,
+          type: DataTypes.ENUM("male", "female", "other"),
+          allowNull: false,
         },
-        birthDay: {
-          type: DataTypes.DATEONLY,
+        birthday: {
+          type: DataTypes.DATE,
           allowNull: false,
         },
         cpf: {
           type: DataTypes.STRING,
           allowNull: false,
-          unique: true,
         },
-        cellphone: {
+        rg: {
           type: DataTypes.STRING,
+          allowNull: true,
         },
-        emergencyContact: {
+        civil_status: {
+          type: DataTypes.ENUM(
+            "single",
+            "married",
+            "divorced",
+            "widowed",
+            "separated"
+          ),
+          allowNull: true,
+        },
+        phone_number: {
           type: DataTypes.STRING,
+          allowNull: true,
+        },
+        email: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        nationality: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        emergency_contact: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        list_of_allergies: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        specific_care: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        health_insurance: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        insurance_number: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        insurance_expiration_date: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        user_id: {
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
-        allergies: {
-          type: DataTypes.ENUM(
-            "NONE",
-            "ASTMHA",
-            "SKIN_ALLERGIES",
-            "LACTOSE",
-            "OTHER"
-          ),
-          defaultValue: "NONE",
-        },
-        healthCare: {
-          type: DataTypes.STRING,
-        },
-        status: {
-          type: DataTypes.ENUM(
-            "AWAITING_TREATMENT",
-            "IN_TREATMENT",
-            "NOT_TREATED",
-            "TREATED"
-          ),
-          defaultValue: "AWAITING_TREATMENT",
-        },
-        appointment_id: {
+        address_id: {
           type: DataTypes.INTEGER,
-          defaultValue: 0,
+          allowNull: true,
+        },
+        system_status: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: true,
         },
       },
       {
         sequelize,
         modelName: "Patient",
         tableName: "patients",
+        underscored: true,
+        timestamps: true,
+        paranoid: true,
       }
     );
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Address, { foreignKey: "address_id" });
+    this.belongsTo(models.User, { foreignKey: "user_id" });
+
+    this.hasMany(models.Appointment, { foreignKey: "patient_id" });
+    this.hasMany(models.Diet, { foreignKey: "patient_id" });
+    this.hasMany(models.Exam, { foreignKey: "patient_id" });
+    this.hasMany(models.Medicine, { foreignKey: "patient_id" });
+    this.hasMany(models.PhysicalExercise, { foreignKey: "patient_id" });
+
+    // Novas relações
+    this.hasMany(models.Prescription, { foreignKey: "patient_id" });
+    this.hasMany(models.MedicalRecord, { foreignKey: "patient_id" });
+    this.hasMany(models.ExamResult, { foreignKey: "patient_id" });
+    this.hasMany(models.Document, { foreignKey: "patient_id" });
   }
 }
 

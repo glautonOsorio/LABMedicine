@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 
-class Appointment extends Model {
+class Diet extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -10,55 +10,43 @@ class Appointment extends Model {
           allowNull: false,
           primaryKey: true,
         },
-        appointmentReason: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        appointmentDate: {
+        name: { type: DataTypes.STRING, allowNull: false },
+
+        date: {
           type: DataTypes.DATEONLY,
           allowNull: false,
         },
-        appointmentTime: {
+        time: {
           type: DataTypes.TIME,
           allowNull: false,
         },
+        dietType: DataTypes.ENUM(
+          "low carb",
+          "dash",
+          "paleolithic",
+          "ketogenic",
+          "dukan",
+          "mediterranean",
+          "other"
+        ),
         description: {
           type: DataTypes.STRING,
           allowNull: true,
         },
-        prescriptionMedication: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        },
-        dosagePrecautions: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        },
-        systemStatus: {
-          type: DataTypes.BOOLEAN,
-          allowNull: false,
-          defaultValue: true,
-        },
-        patient_id: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-        },
-        user_id: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-        },
+        systemStatus: { type: DataTypes.BOOLEAN, defaultValue: true },
+        patientId: DataTypes.INTEGER,
+        userId: DataTypes.INTEGER,
       },
       {
         sequelize,
-        modelName: "Appointment",
-        tableName: "appointments",
+        modelName: "Diet",
+        tableName: "diets",
         underscored: true,
         timestamps: true,
         paranoid: true,
       }
     );
   }
-
   static associate(models) {
     this.belongsTo(models.Patient, {
       as: "patient",
@@ -72,4 +60,4 @@ class Appointment extends Model {
   }
 }
 
-module.exports = Appointment;
+module.exports = Diet;
